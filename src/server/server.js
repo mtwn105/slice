@@ -2,7 +2,8 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const connectDB = require("./db");
-const userRouter = require("./routes/user");
+const authRouter = require("./routes/auth");
+const { router: userRouter } = require("./routes/user");
 const expenseRouter = require("./routes/expense");
 const balanceRouter = require("./routes/balance");
 require("dotenv").config();
@@ -17,15 +18,28 @@ connectDB();
 
 // Routers
 
+app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/expense", expenseRouter);
 app.use("/balance", balanceRouter);
 
 // Error Handler
-app.use(function (err, req, res, next) {
-  console.error(err.name);
-  res.status(500).send("Something broke!");
-});
+function notFound(req, res, next) {
+  res.status(404);
+  const error = new Error('Not Found - ' + req.originalUrl);
+  next(error);
+}
+
+function errorHandler(err, req, res, next) {
+  res.status(res.statusCode || 500);
+  res.json({
+    error: err.name,
+    message: err.message,
+  });
+}
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("Slice is running");

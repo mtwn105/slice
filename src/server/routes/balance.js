@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const { User, Expense } = require("../schemas");
-const errorHandler = require("../errorhandler");
 
 router.get("/:userOne/:userTwo", async (req, res, next) => {
   const userOne = req.params.userOne;
@@ -13,9 +12,9 @@ router.get("/:userOne/:userTwo", async (req, res, next) => {
 
   if (expenses.length > 0) {
     const balance = await calculateBalance(userOne, userTwo, expenses);
-    return res.status(200).send({ userOne, userTwo, balance });
+    res.status(200).send({ userOne, userTwo, balance });
   } else {
-    return res.status(204).send();
+    res.status(204).send();
   }
 });
 
@@ -26,9 +25,9 @@ router.get("/:userId", async (req, res, next) => {
 
   if (expenses.length > 0) {
     const balance = await calculateTotalBalance(userId, expenses);
-    return res.status(200).send({ userId, balance });
+    res.status(200).send({ userId, balance });
   } else {
-    return res.status(204).send();
+    res.status(204).send();
   }
 });
 

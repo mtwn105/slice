@@ -3,21 +3,20 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const { User, Expense } = require("../schemas");
-const errorHandler = require("../errorhandler");
 
 router.get("/:userId", async (req, res) => {
   console.log("Finding Expenses for User Id ", req.params.userId);
   const expenses = await Expense.find({ members: req.params.userId });
-  return res.json(expenses);
+  res.json(expenses);
 });
 
 router.post("/", async (req, res, next) => {
   try {
     const expense = new Expense(req.body);
     expense.save();
-    return res.status(201).json(expense);
+    res.status(201).json(expense);
   } catch (err) {
-    errorHandler(err, req, res);
+    next(err);
   }
 });
 
@@ -26,7 +25,7 @@ router.get("/:userOne/:userTwo", async (req, res, next) => {
   const userTwo = req.params.userTwo;
 
   const expenses = await Expense.find().all("members", [userOne, userTwo]);
-  return res.json(expenses);
+  res.json(expenses);
 });
 
 module.exports = router;
