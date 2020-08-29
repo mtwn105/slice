@@ -5,7 +5,7 @@ function connectDB() {
   console.log("Connecting to Database");
 
   mongoose
-    .connect(`mongodb://${process.env.DB_HOST}/slice`, {
+    .connect(`${process.env.DB_URL}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

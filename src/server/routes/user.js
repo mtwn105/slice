@@ -16,7 +16,6 @@ router.get("/:userId", async (req, res) => {
   res.json(user);
 });
 
-
 // Search User
 
 async function checkIfUserAlreadyExists(username, email) {
