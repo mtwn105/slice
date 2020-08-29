@@ -15,16 +15,12 @@
 
         <div class="uk-card-body">
           <div v-if="showError" class="uk-alert-danger" uk-alert>
-            <p>
-              {{ errorMessage }}
-            </p>
+            <p>{{ errorMessage }}</p>
           </div>
 
           <form class="uk-form-stacked uk-dark uk-align-center">
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text"
-                >Username</label
-              >
+              <label class="uk-form-label" for="form-stacked-text">Username</label>
               <div class="uk-form-controls uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon: user"></span>
                 <input
@@ -37,9 +33,7 @@
             </div>
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text"
-                >Password</label
-              >
+              <label class="uk-form-label" for="form-stacked-text">Password</label>
               <div class="uk-form-controls uk-width-1-1 uk-inline">
                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
                 <input
@@ -55,9 +49,7 @@
           <button
             @click="login"
             class="uk-button uk-button-large uk-button-primary uk-align-center"
-          >
-            Login
-          </button>
+          >Login</button>
         </div>
       </div>
     </div>
@@ -72,7 +64,7 @@ export default {
       username: "",
       password: "",
       showError: false,
-      errorMessage: "",
+      errorMessage: ""
     };
   },
   methods: {
@@ -82,7 +74,7 @@ export default {
 
       const user = {
         username: this.username,
-        password: this.password,
+        password: this.password
       };
 
       console.log(user);
@@ -92,24 +84,25 @@ export default {
       fetch(loginUrl, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(user),
-      }).then((response) => {
-        response.json().then((json) => {
+        body: JSON.stringify(user)
+      }).then(response => {
+        response.json().then(json => {
           if (json.error) {
             this.showError = true;
             this.errorMessage = json.error;
           } else {
             console.log(json);
+            // Set Local Storage
             localStorage.setItem("isUserLoggedIn", "true");
             localStorage.setItem("username", json.username);
             localStorage.setItem("token", json.token);
           }
         });
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
