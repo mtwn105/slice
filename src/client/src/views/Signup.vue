@@ -26,12 +26,29 @@
               <div class="uk-form-controls uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon: pencil"></span>
                 <input
-                  v-model="name"
+                  :class="{
+                    'uk-form-danger':
+                      (!$v.name.required || !$v.name.minLength) &&
+                      formSubmitted,
+                  }"
+                  v-model.trim="$v.name.$model"
                   class="uk-input uk-width-1-1"
                   type="text"
                   placeholder="Enter your name"
                 />
               </div>
+              <small
+                class="error-text uk-form-help-block "
+                v-if="!$v.name.required && formSubmitted"
+              >
+                Name is required
+              </small>
+              <small
+                class="error-text uk-form-help-block"
+                v-if="!$v.name.minLength && formSubmitted"
+              >
+                Name should have at least 4 characters
+              </small>
             </div>
 
             <div class="uk-margin">
@@ -39,12 +56,37 @@
               <div class="uk-form-controls uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon: mail"></span>
                 <input
-                  v-model="email"
+                  :class="{
+                    'uk-form-danger':
+                      (!$v.email.required ||
+                        !$v.email.minLength ||
+                        !$v.email.email) &&
+                      formSubmitted,
+                  }"
+                  v-model.trim="$v.email.$model"
                   class="uk-input uk-width-1-1"
                   type="email"
                   placeholder="Enter your email"
                 />
               </div>
+              <small
+                class="error-text uk-form-help-block "
+                v-if="!$v.email.required && formSubmitted"
+              >
+                Email is required
+              </small>
+              <small
+                class="error-text uk-form-help-block"
+                v-if="!$v.email.minLength && formSubmitted"
+              >
+                Email should have at least 4 characters
+              </small>
+              <small
+                class="error-text uk-form-help-block"
+                v-if="!$v.email.email && formSubmitted"
+              >
+                Invalid email format
+              </small>
             </div>
 
             <div class="uk-margin">
@@ -54,12 +96,29 @@
               <div class="uk-form-controls uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon: user"></span>
                 <input
-                  v-model="username"
+                  :class="{
+                    'uk-form-danger':
+                      (!$v.username.required || !$v.username.minLength) &&
+                      formSubmitted,
+                  }"
+                  v-model.trim="$v.username.$model"
                   class="uk-input uk-width-1-1"
                   type="text"
                   placeholder="Enter your username"
                 />
               </div>
+              <small
+                class="error-text uk-form-help-block "
+                v-if="!$v.username.required && formSubmitted"
+              >
+                Username is required
+              </small>
+              <small
+                class="error-text uk-form-help-block"
+                v-if="!$v.username.minLength && formSubmitted"
+              >
+                Username should have at least 4 characters
+              </small>
             </div>
 
             <div class="uk-margin">
@@ -69,12 +128,29 @@
               <div class="uk-form-controls uk-width-1-1 uk-inline">
                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
                 <input
-                  v-model="password"
+                  :class="{
+                    'uk-form-danger':
+                      (!$v.password.required || !$v.password.minLength) &&
+                      formSubmitted,
+                  }"
+                  v-model.trim="$v.password.$model"
                   class="uk-input uk-width-1-1"
                   type="password"
                   placeholder="Enter your password"
                 />
               </div>
+              <small
+                class="error-text uk-form-help-block "
+                v-if="!$v.password.required && formSubmitted"
+              >
+                Password is required
+              </small>
+              <small
+                class="error-text uk-form-help-block"
+                v-if="!$v.password.minLength && formSubmitted"
+              >
+                Password should have at least 8 characters
+              </small>
             </div>
 
             <div class="uk-margin">
@@ -84,12 +160,37 @@
               <div class="uk-form-controls uk-width-1-1 uk-inline">
                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
                 <input
-                  v-model="confirmPassword"
+                  :class="{
+                    'uk-form-danger':
+                      (!$v.confirmPassword.required ||
+                        !$v.confirmPassword.minLength ||
+                        !$v.confirmPassword.sameAsPassword) &&
+                      formSubmitted,
+                  }"
+                  v-model.trim="$v.confirmPassword.$model"
                   class="uk-input uk-width-1-1"
                   type="password"
                   placeholder="Re-Enter your password"
                 />
               </div>
+              <small
+                class="error-text uk-form-help-block "
+                v-if="!$v.confirmPassword.required && formSubmitted"
+              >
+                Password is required
+              </small>
+              <small
+                class="error-text uk-form-help-block"
+                v-if="!$v.confirmPassword.minLength && formSubmitted"
+              >
+                Password should have at least 8 characters
+              </small>
+              <small
+                class="error-text uk-form-help-block"
+                v-if="!$v.confirmPassword.sameAsPassword && formSubmitted"
+              >
+                Passwords does not match
+              </small>
             </div>
           </form>
 
@@ -106,6 +207,8 @@
 </template>
 
 <script>
+import { required, minLength, sameAs } from "vuelidate/lib/validators";
+
 export default {
   name: "Login",
   data() {
@@ -117,12 +220,43 @@ export default {
       confirmPassword: "",
       showError: false,
       errorMessage: "",
+      formSubmitted: false,
     };
+  },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(4),
+    },
+    username: {
+      required,
+      minLength: minLength(4),
+    },
+    email: {
+      required,
+      minLength: minLength(4),
+    },
+    password: {
+      required,
+      minLength: minLength(8),
+    },
+    confirmPassword: {
+      required,
+      minLength: minLength(8),
+      sameAsPassword: sameAs("password"),
+    },
   },
   methods: {
     signup() {
+      this.formSubmitted = true;
       this.showError = false;
       this.errorMessage = "";
+
+      this.$v.$touch();
+
+      if (this.$v.$invalid) {
+        return;
+      }
 
       if (this.password != this.confirmPassword) {
         this.showError = true;
@@ -170,5 +304,9 @@ export default {
 }
 .signup-section {
   align-content: center;
+}
+.error-text {
+  color: red;
+  display: block;
 }
 </style>
