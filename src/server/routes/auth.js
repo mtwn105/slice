@@ -63,7 +63,10 @@ router.post("/login", async (req, res, next) => {
         );
 
         res.status(200).send({
-          username: userObj.username,
+          userId: userByUsername._id,
+          username: userByUsername.username,
+          name: userByUsername.name,
+          email: userByUsername.email,
           token,
         });
       } else {

@@ -28,4 +28,12 @@ router.get("/:userOne/:userTwo", async (req, res, next) => {
   res.json(expenses);
 });
 
+router.get("/:userOne", async (req, res, next) => {
+  const userOne = req.params.userOne;
+  const userTwo = req.params.userTwo;
+
+  const expenses = await Expense.find().all("members", [userOne]);
+  res.json(expenses);
+});
+
 module.exports = router;

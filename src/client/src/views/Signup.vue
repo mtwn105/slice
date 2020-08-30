@@ -58,10 +58,7 @@
                 <input
                   :class="{
                     'uk-form-danger':
-                      (!$v.email.required ||
-                        !$v.email.minLength ||
-                        !$v.email.email) &&
-                      formSubmitted,
+                      (!$v.email.required || !$v.email.email) && formSubmitted,
                   }"
                   v-model.trim="$v.email.$model"
                   class="uk-input uk-width-1-1"
@@ -74,12 +71,6 @@
                 v-if="!$v.email.required && formSubmitted"
               >
                 Email is required
-              </small>
-              <small
-                class="error-text uk-form-help-block"
-                v-if="!$v.email.minLength && formSubmitted"
-              >
-                Email should have at least 4 characters
               </small>
               <small
                 class="error-text uk-form-help-block"
@@ -207,7 +198,7 @@
 </template>
 
 <script>
-import { required, minLength, sameAs } from "vuelidate/lib/validators";
+import { required, minLength, sameAs, email } from "vuelidate/lib/validators";
 
 export default {
   name: "Login",
@@ -234,7 +225,7 @@ export default {
     },
     email: {
       required,
-      minLength: minLength(4),
+      email,
     },
     password: {
       required,

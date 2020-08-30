@@ -39,6 +39,7 @@ const expenseSchema = new Schema({
   name: { type: String, required: true },
   amount: { type: Number, required: true, min: 1 },
   groupId: { type: String },
+  category: { type: String },
   members: { type: [String], required: true },
   payers: { type: [splitSchema], required: true },
   split: { type: [splitSchema], required: true },

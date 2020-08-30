@@ -2,7 +2,7 @@
   <div id="app" class="uk-background-primary">
     <nav class="uk-navbar-container uk-margin uk-navbar-transparent" uk-navbar>
       <div class="uk-navbar-left">
-        <a class="uk-navbar-item uk-logo uk-light" href="#">Slice</a>
+        <a class="uk-navbar-item uk-logo uk-light brand-name" href="#">Slice</a>
       </div>
       <div class="uk-navbar-right">
         <div class="uk-navbar-item">
@@ -21,6 +21,17 @@
             >
               Login
             </button>
+            <div class="user-info">
+              <h4 class="uk-text-bold user-name">{{ user.name }}</h4>
+
+              <button
+                v-if="loggedIn"
+                @click="logout"
+                class="uk-button uk-button-default uk-light"
+              >
+                Logout
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -29,11 +40,47 @@
   </div>
 </template>
 
+<script>
+import UIkit from "uikit";
+import { store, mutations } from "./store/store";
+
+export default {
+  computed: {
+    loggedIn() {
+      return store.loggedIn;
+    },
+    user() {
+      return store.user;
+    },
+  },
+  methods: {
+    logout() {
+      // Logout
+      mutations.setLoggedIn(false);
+      mutations.setUser(null);
+      UIkit.notification("Logged Out Successfully.", { status: "success" });
+      localStorage.clear();
+      this.$router.push("/login");
+    },
+  },
+};
+</script>
+
 <style lang="scss">
 #app {
   overflow-y: auto;
 }
-.home {
+.user-info {
+  display: flex;
+}
+
+.user-name {
+  color: white;
+  margin: 8px 20px;
+}
+
+.brand-name {
+  color: white;
 }
 
 .login-section {
