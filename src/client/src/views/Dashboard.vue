@@ -37,9 +37,11 @@ export default {
   name: "Dashboard",
   mounted() {
     const fetchTotalBalanceUrl =
-      "http://localhost:8000/balance/" + localStorage.getItem("userId");
+      "https://slice-nodejs.herokuapp.com/balance/" +
+      localStorage.getItem("userId");
     const fetchExpensesUrl =
-      "http://localhost:8000/expense/" + localStorage.getItem("userId");
+      "https://slice-nodejs.herokuapp.com/expense/" +
+      localStorage.getItem("userId");
 
     fetch(fetchTotalBalanceUrl, {
       method: "GET",

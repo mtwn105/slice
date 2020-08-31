@@ -87,7 +87,7 @@ export default {
 
       console.log(user);
 
-      const loginUrl = "http://localhost:8000/auth/login";
+      const loginUrl = "https://slice-nodejs.herokuapp.com/auth/login";
 
       fetch(loginUrl, {
         method: "POST",
