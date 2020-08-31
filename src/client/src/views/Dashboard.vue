@@ -74,7 +74,7 @@ export default {
   },
   data() {
     return {
-      totalBalance: -10,
+      totalBalance: 0,
       expenses: [],
     };
   },
