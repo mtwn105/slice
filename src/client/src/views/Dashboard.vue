@@ -3,7 +3,7 @@
     <h1 class="uk-heading-divider dashboard-heading">Dashboard</h1>
     <div class="uk-child-width-expand@s uk-grid-small uk-grid-match" uk-grid>
       <div>
-        <div class="uk-card uk-card-default uk-card-body">
+        <div class="uk-card uk-card-default uk-card-body uk-animation-scale-up">
           <h2
             :class="{
               'uk-text-success': totalBalance > 0,
@@ -23,7 +23,9 @@
         </div>
       </div>
       <div>
-        <div class="uk-card uk-card-secondary uk-card-body">
+        <div
+          class="uk-card uk-card-secondary uk-card-body uk-animation-scale-up"
+        >
           <h3 class="uk-card-title">{{ expenses.length }}</h3>
           <p>Total Expenses</p>
         </div>
@@ -86,6 +88,8 @@ export default {
   padding-left: 20px;
   padding-right: 20px;
   min-height: 100vh;
+  max-width: 80vw;
+  margin: auto;
 }
 
 .dashboard-heading {
