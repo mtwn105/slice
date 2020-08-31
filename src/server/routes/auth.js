@@ -10,7 +10,7 @@ router.post("/signup", async (req, res, next) => {
   const userObj = req.body;
 
   console.log("Creating User");
-  console.log("User : ", userObj);
+  console.debug("User : ", userObj);
 
   const userAlreadyExists = await checkIfUserAlreadyExists(
     userObj.username,
@@ -45,7 +45,7 @@ router.post("/login", async (req, res, next) => {
   const userObj = req.body;
 
   console.log("Logining In User");
-  console.log("User : ", userObj);
+  console.debug("User : ", userObj);
 
   const userByUsername = await User.findOne({ username: userObj.username });
 
@@ -61,6 +61,9 @@ router.post("/login", async (req, res, next) => {
           process.env.TOKEN_SECRET,
           { expiresIn: "1d" }
         );
+
+        userByUsername.lastLoginDate = new Date();
+        userByUsername.save();
 
         res.status(200).send({
           userId: userByUsername._id,

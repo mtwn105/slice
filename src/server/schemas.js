@@ -1,13 +1,26 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// User Schema
+// Friend Schema
+const friendSchema = new Schema({
+  userId: { type: String },
+  username: { type: String },
+  name: { type: String },
+  email: { type: String },
+});
 
+const Friend = mongoose.model("Friend", friendSchema, "users");
+
+// User Schema
 const userSchema = new Schema({
   username: { type: String, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  friends: {
+    type: [friendSchema],
+    default: [],
+  },
   signedUpDate: { type: Date, default: Date.now },
   lastLoginDate: { type: Date, default: Date.now },
 });
@@ -18,7 +31,7 @@ const User = mongoose.model("User", userSchema, "users");
 
 const groupSchema = new Schema({
   name: { type: String, required: true },
-  members: { type: [userSchema] },
+  members: { type: [userSchema], required: true },
   createdDate: { type: Date, default: Date.now },
 });
 
@@ -53,4 +66,5 @@ module.exports = {
   Group,
   Split,
   Expense,
+  Friend,
 };

@@ -2,10 +2,12 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const connectDB = require("./db");
+const authenticateJWT = require("./jwt");
 const authRouter = require("./routes/auth");
 const { router: userRouter } = require("./routes/user");
 const expenseRouter = require("./routes/expense");
 const balanceRouter = require("./routes/balance");
+const friendRouter = require("./routes/friends");
 require("dotenv").config();
 
 const app = express();
@@ -19,9 +21,10 @@ connectDB();
 // Routers
 
 app.use("/auth", authRouter);
-app.use("/users", userRouter);
-app.use("/expense", expenseRouter);
-app.use("/balance", balanceRouter);
+app.use("/users", authenticateJWT, userRouter);
+app.use("/friends", authenticateJWT, friendRouter);
+app.use("/expense", authenticateJWT, expenseRouter);
+app.use("/balance", authenticateJWT, balanceRouter);
 
 // Error Handler
 function notFound(req, res, next) {
