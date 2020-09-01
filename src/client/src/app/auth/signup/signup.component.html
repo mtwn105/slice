@@ -1,0 +1,231 @@
+<div class="login-section">
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column is-half">
+      <div class="card">
+        <section class="hero is-warning">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">Signup</h1>
+              <h2 class="subtitle">Get Started splitting bills!</h2>
+            </div>
+          </div>
+        </section>
+        <div class="card-content">
+          <div class="content">
+            <form [formGroup]="signupForm" (ngSubmit)="signup()">
+              <div class="field">
+                <label class="label">Name</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    [ngClass]="{
+                      'is-danger':
+                        signupForm.controls.name.dirty &&
+                        signupForm.controls.name.errors
+                    }"
+                    name="name"
+                    id="name"
+                    class="input"
+                    type="text"
+                    placeholder="Enter your name"
+                    formControlName="name"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user-circle"></i>
+                  </span>
+                  <p
+                    *ngIf="
+                      signupForm.controls.name.dirty &&
+                      signupForm.controls.name.errors?.required
+                    "
+                    class="help is-danger"
+                  >
+                    Name is required.
+                  </p>
+                  <p
+                    *ngIf="
+                      signupForm.controls.name.dirty &&
+                      signupForm.controls.name.errors?.minlength
+                    "
+                    class="help is-danger"
+                  >
+                    Name at least have 4 characters.
+                  </p>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    [ngClass]="{
+                      'is-danger':
+                        signupForm.controls.email.dirty &&
+                        signupForm.controls.email.errors
+                    }"
+                    name="email"
+                    id="email"
+                    class="input"
+                    type="email"
+                    placeholder="Enter your email"
+                    formControlName="email"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <p
+                    *ngIf="
+                      signupForm.controls.email.dirty &&
+                      signupForm.controls.email.errors?.required
+                    "
+                    class="help is-danger"
+                  >
+                    Email is required.
+                  </p>
+                  <p
+                    *ngIf="
+                      signupForm.controls.email.dirty &&
+                      signupForm.controls.email.errors?.email
+                    "
+                    class="help is-danger"
+                  >
+                    Email is Invalid
+                  </p>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    [ngClass]="{
+                      'is-danger':
+                        signupForm.controls.username.dirty &&
+                        signupForm.controls.username.errors
+                    }"
+                    name="username"
+                    id="username"
+                    class="input"
+                    type="text"
+                    placeholder="Choose your username"
+                    formControlName="username"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <p
+                    *ngIf="
+                      signupForm.controls.username.dirty &&
+                      signupForm.controls.username.errors?.required
+                    "
+                    class="help is-danger"
+                  >
+                    Username is required.
+                  </p>
+                  <p
+                    *ngIf="
+                      signupForm.controls.username.dirty &&
+                      signupForm.controls.username.errors?.minlength
+                    "
+                    class="help is-danger"
+                  >
+                    Username at least have 4 characters.
+                  </p>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Password</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    [ngClass]="{
+                      'is-danger':
+                        signupForm.controls.password.dirty &&
+                        signupForm.controls.password.errors
+                    }"
+                    name="password"
+                    id="password"
+                    class="input"
+                    type="password"
+                    placeholder="Choose your password"
+                    formControlName="password"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                  </span>
+                  <p
+                    *ngIf="
+                      signupForm.controls.password.dirty &&
+                      signupForm.controls.password.errors?.required
+                    "
+                    class="help is-danger"
+                  >
+                    Password is required.
+                  </p>
+                  <p
+                    *ngIf="
+                      signupForm.controls.password.dirty &&
+                      signupForm.controls.password.errors?.minlength
+                    "
+                    class="help is-danger"
+                  >
+                    Password at least have 8 characters.
+                  </p>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Confirm Password</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    [ngClass]="{
+                      'is-danger':
+                        signupForm.controls.confirmPassword.dirty &&
+                        signupForm.controls.confirmPassword.errors
+                    }"
+                    name="password"
+                    id="password"
+                    class="input"
+                    type="password"
+                    placeholder="Re-enter your password"
+                    formControlName="confirmPassword"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                  </span>
+                  <p
+                    *ngIf="
+                      signupForm.controls.confirmPassword.dirty &&
+                      signupForm.controls.confirmPassword.errors?.required
+                    "
+                    class="help is-danger"
+                  >
+                    Confirm Password is required.
+                  </p>
+                  <p
+                    *ngIf="
+                      signupForm.controls.confirmPassword.dirty &&
+                      signupForm.controls.confirmPassword.errors?.minlength
+                    "
+                    class="help is-danger"
+                  >
+                    Confirm Password at least have 8 characters.
+                  </p>
+                </div>
+              </div>
+
+              <div class="field is-grouped">
+                <div class="control">
+                  <button
+                    [disabled]="formSubmitted && signupForm.invalid"
+                    [ngClass]="{ 'is-loading': loading }"
+                    class="button is-link is-medium"
+                  >
+                    Signup
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column"></div>
+  </div>
+</div>
