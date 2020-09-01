@@ -8,9 +8,13 @@ export const store = Vue.observable({
     email: "",
     name: "",
   },
+  prodMode: true,
 });
 
 export const mutations = {
+  setDevMode() {
+    store.prodMode = false;
+  },
   setLoggedIn(value) {
     store.loggedIn = value;
   },

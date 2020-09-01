@@ -15,9 +15,7 @@
 
         <div class="uk-card-body">
           <div v-if="showError" class="uk-alert-danger" uk-alert>
-            <p>
-              {{ errorMessage }}
-            </p>
+            <p>{{ errorMessage }}</p>
           </div>
 
           <form class="uk-form-stacked uk-dark uk-align-center">
@@ -38,17 +36,13 @@
                 />
               </div>
               <small
-                class="error-text uk-form-help-block "
+                class="error-text uk-form-help-block"
                 v-if="!$v.name.required && formSubmitted"
-              >
-                Name is required
-              </small>
+              >Name is required</small>
               <small
                 class="error-text uk-form-help-block"
                 v-if="!$v.name.minLength && formSubmitted"
-              >
-                Name should have at least 4 characters
-              </small>
+              >Name should have at least 4 characters</small>
             </div>
 
             <div class="uk-margin">
@@ -67,23 +61,17 @@
                 />
               </div>
               <small
-                class="error-text uk-form-help-block "
+                class="error-text uk-form-help-block"
                 v-if="!$v.email.required && formSubmitted"
-              >
-                Email is required
-              </small>
+              >Email is required</small>
               <small
                 class="error-text uk-form-help-block"
                 v-if="!$v.email.email && formSubmitted"
-              >
-                Invalid email format
-              </small>
+              >Invalid email format</small>
             </div>
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text"
-                >Username</label
-              >
+              <label class="uk-form-label" for="form-stacked-text">Username</label>
               <div class="uk-form-controls uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon: user"></span>
                 <input
@@ -99,23 +87,17 @@
                 />
               </div>
               <small
-                class="error-text uk-form-help-block "
+                class="error-text uk-form-help-block"
                 v-if="!$v.username.required && formSubmitted"
-              >
-                Username is required
-              </small>
+              >Username is required</small>
               <small
                 class="error-text uk-form-help-block"
                 v-if="!$v.username.minLength && formSubmitted"
-              >
-                Username should have at least 4 characters
-              </small>
+              >Username should have at least 4 characters</small>
             </div>
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text"
-                >Password</label
-              >
+              <label class="uk-form-label" for="form-stacked-text">Password</label>
               <div class="uk-form-controls uk-width-1-1 uk-inline">
                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
                 <input
@@ -131,23 +113,17 @@
                 />
               </div>
               <small
-                class="error-text uk-form-help-block "
+                class="error-text uk-form-help-block"
                 v-if="!$v.password.required && formSubmitted"
-              >
-                Password is required
-              </small>
+              >Password is required</small>
               <small
                 class="error-text uk-form-help-block"
                 v-if="!$v.password.minLength && formSubmitted"
-              >
-                Password should have at least 8 characters
-              </small>
+              >Password should have at least 8 characters</small>
             </div>
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text"
-                >Confirm Password</label
-              >
+              <label class="uk-form-label" for="form-stacked-text">Confirm Password</label>
               <div class="uk-form-controls uk-width-1-1 uk-inline">
                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
                 <input
@@ -165,32 +141,24 @@
                 />
               </div>
               <small
-                class="error-text uk-form-help-block "
+                class="error-text uk-form-help-block"
                 v-if="!$v.confirmPassword.required && formSubmitted"
-              >
-                Password is required
-              </small>
+              >Password is required</small>
               <small
                 class="error-text uk-form-help-block"
                 v-if="!$v.confirmPassword.minLength && formSubmitted"
-              >
-                Password should have at least 8 characters
-              </small>
+              >Password should have at least 8 characters</small>
               <small
                 class="error-text uk-form-help-block"
                 v-if="!$v.confirmPassword.sameAsPassword && formSubmitted"
-              >
-                Passwords does not match
-              </small>
+              >Passwords does not match</small>
             </div>
           </form>
 
           <button
             @click="signup"
             class="uk-button uk-button-large uk-button-primary uk-align-center"
-          >
-            Login
-          </button>
+          >Sign Up</button>
         </div>
       </div>
     </div>
@@ -199,6 +167,7 @@
 
 <script>
 import { required, minLength, sameAs, email } from "vuelidate/lib/validators";
+import { signUp } from "../API";
 
 export default {
   name: "Login",
@@ -211,34 +180,34 @@ export default {
       confirmPassword: "",
       showError: false,
       errorMessage: "",
-      formSubmitted: false,
+      formSubmitted: false
     };
   },
   validations: {
     name: {
       required,
-      minLength: minLength(4),
+      minLength: minLength(4)
     },
     username: {
       required,
-      minLength: minLength(4),
+      minLength: minLength(4)
     },
     email: {
       required,
-      email,
+      email
     },
     password: {
       required,
-      minLength: minLength(8),
+      minLength: minLength(8)
     },
     confirmPassword: {
       required,
       minLength: minLength(8),
-      sameAsPassword: sameAs("password"),
-    },
+      sameAsPassword: sameAs("password")
+    }
   },
   methods: {
-    signup() {
+    async signup() {
       this.formSubmitted = true;
       this.showError = false;
       this.errorMessage = "";
@@ -260,20 +229,15 @@ export default {
         name: this.name,
         email: this.email,
         password: this.password,
+        friends: []
       };
 
       console.log(user);
 
-      const signupUrl = "https://slice-nodejs.herokuapp.com/auth/signup";
+      const response = await signUp(user);
 
-      fetch(signupUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }).then((response) => {
-        response.json().then((json) => {
+      if (response) {
+        response.json().then(json => {
           if (json.error) {
             this.showError = true;
             this.errorMessage = json.message;
@@ -282,9 +246,9 @@ export default {
             this.$router.push("/login");
           }
         });
-      });
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

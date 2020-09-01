@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import SignUp from "../views/Signup.vue";
 import Dashboard from "../views/Dashboard.vue";
+import AddFriend from "../views/AddFriend.vue";
 import { mutations } from "../store/store";
 
 Vue.use(VueRouter);
@@ -20,6 +21,7 @@ function guardMyroute(to, from, next) {
       name: localStorage.getItem("name"),
       email: localStorage.getItem("email"),
     });
+    mutations.setDevMode();
     next(); // allow to enter route
   } else {
     mutations.setLoggedIn(false);
@@ -49,6 +51,12 @@ const routes = [
     name: "Dashboard",
     beforeEnter: guardMyroute,
     component: Dashboard,
+  },
+  {
+    path: "/add-a-friend",
+    name: "AddFriend",
+    beforeEnter: guardMyroute,
+    component: AddFriend,
   },
 ];
 

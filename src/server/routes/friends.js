@@ -38,6 +38,34 @@ router.post("/:userId/:friendId", async (req, res) => {
   }
 });
 
+// Remove A Friend
+router.delete("/:userId/:friendId", async (req, res) => {
+  const userId = req.params.userId;
+  const friendId = req.params.friendId;
+  console.log("Getting User ", userId);
+  console.log("Deleting Friend ", friendId);
+  const user = await User.findOne({ _id: userId });
+  const friends = user.friends;
+  console.debug("Friends", friends);
+  const friend = friends.find((f) => f.userId == friendId);
+  console.debug("Friend", friend);
+  const friendIndex = friends.findIndex((f) => f.userId == friendId);
+  console.debug("Friend Index", friendIndex);
+
+  if (!friend) {
+    res.status(400).json({
+      error: "Invalid Friend",
+      message: `No user exists with id ${friendId}`,
+    });
+  } else {
+    user.friends = friends.filter((f) => f.userId != friendId);
+    console.debug("Friends", user.friends);
+
+    user.save();
+    res.json(user);
+  }
+});
+
 // Get All Friends
 router.get("/:userId", async (req, res, next) => {
   try {

@@ -20,9 +20,7 @@
 
           <form class="uk-form-stacked uk-dark uk-align-center">
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text"
-                >Username</label
-              >
+              <label class="uk-form-label" for="form-stacked-text">Username</label>
               <div class="uk-form-controls uk-inline uk-width-1-1">
                 <span class="uk-form-icon" uk-icon="icon: user"></span>
                 <input
@@ -35,9 +33,7 @@
             </div>
 
             <div class="uk-margin">
-              <label class="uk-form-label" for="form-stacked-text"
-                >Password</label
-              >
+              <label class="uk-form-label" for="form-stacked-text">Password</label>
               <div class="uk-form-controls uk-width-1-1 uk-inline">
                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
                 <input
@@ -53,9 +49,7 @@
           <button
             @click="login"
             class="uk-button uk-button-large uk-button-primary uk-align-center"
-          >
-            Login
-          </button>
+          >Login</button>
         </div>
       </div>
     </div>
@@ -64,6 +58,7 @@
 
 <script>
 import { mutations } from "../store/store";
+import { logIn } from "../API";
 
 export default {
   name: "Login",
@@ -72,56 +67,48 @@ export default {
       username: "",
       password: "",
       showError: false,
-      errorMessage: "",
+      errorMessage: ""
     };
   },
   methods: {
-    login() {
+    async login() {
       this.showError = false;
       this.errorMessage = "";
 
       const user = {
         username: this.username,
-        password: this.password,
+        password: this.password
       };
 
       console.log(user);
 
-      const loginUrl = "https://slice-nodejs.herokuapp.com/auth/login";
+      const response = await logIn(user);
 
-      fetch(loginUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }).then((response) => {
-        response.json().then((json) => {
-          if (json.error) {
-            this.showError = true;
-            this.errorMessage = json.error;
-          } else {
-            console.log(json);
-            // Set Local Storage
-            mutations.setLoggedIn(true);
-            localStorage.setItem("isUserLoggedIn", "true");
-            localStorage.setItem("username", json.username);
-            localStorage.setItem("userId", json.userId);
-            localStorage.setItem("name", json.name);
-            localStorage.setItem("email", json.email);
-            localStorage.setItem("token", json.token);
-            mutations.setUser({
-              userId: localStorage.getItem("userId"),
-              username: localStorage.getItem("username"),
-              name: localStorage.getItem("name"),
-              email: localStorage.getItem("email"),
-            });
-            this.$router.push("/dashboard");
-          }
-        });
+      response.json().then(json => {
+        if (json.error) {
+          this.showError = true;
+          this.errorMessage = json.error;
+        } else {
+          console.log(json);
+          // Set Local Storage
+          mutations.setLoggedIn(true);
+          localStorage.setItem("isUserLoggedIn", "true");
+          localStorage.setItem("username", json.username);
+          localStorage.setItem("userId", json.userId);
+          localStorage.setItem("name", json.name);
+          localStorage.setItem("email", json.email);
+          localStorage.setItem("token", json.token);
+          mutations.setUser({
+            userId: localStorage.getItem("userId"),
+            username: localStorage.getItem("username"),
+            name: localStorage.getItem("name"),
+            email: localStorage.getItem("email")
+          });
+          this.$router.push("/dashboard");
+        }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
