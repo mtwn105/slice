@@ -16,4 +16,10 @@ export class BalanceService {
       `${this.appUrl}/balance/${localStorage.getItem("userId")}`
     );
   }
+
+  getBalance(): any {
+    return this.http.get(
+      `${this.appUrl}/balance/${localStorage.getItem("userId")}`
+    );
+  }
 }

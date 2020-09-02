@@ -17,8 +17,9 @@ import { BalanceService } from "./balance.service";
 import { ExpenseService } from "./expense.service";
 import { FriendsService } from "./friends.service";
 import { HttpRequestInterceptor } from "./http.interceptor";
-import { ExpenseItemComponent } from './dashboard/expense-item/expense-item.component';
-import { FriendItemComponent } from './dashboard/friend-item/friend-item.component';
+import { ExpenseItemComponent } from "./dashboard/expense-item/expense-item.component";
+import { FriendItemComponent } from "./dashboard/friend-item/friend-item.component";
+import { AvatarModule } from "ngx-avatar";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FriendItemComponent } from './dashboard/friend-item/friend-item.compone
     ReactiveFormsModule,
     HttpClientModule,
     NwbAllModule,
+    AvatarModule,
   ],
   providers: [
     {

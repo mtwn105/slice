@@ -1,0 +1,30 @@
+<div class="box">
+  <article class="media">
+    <div class="media-left">
+      <ngx-avatar
+        [name]="friend.name"
+        value="28%"
+        size="80"
+        [round]="true"
+      ></ngx-avatar>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>{{ friend.name }}</strong>
+          <small>@{{ friend.username }}</small>
+          <br />
+          <small>Email: {{ friend.email }}</small>
+          <br />
+        </p>
+        <p *ngIf="friend.balance == 0" class="subtitle">You are settled up</p>
+        <p *ngIf="friend.balance > 0" class="subtitle">
+          You lended {{ friend.balance | currency: "INR" }}
+        </p>
+        <p *ngIf="friend.balance < 0" class="subtitle">
+          You owed {{ friend.balance * -1 | currency: "INR" }}
+        </p>
+      </div>
+    </div>
+  </article>
+</div>

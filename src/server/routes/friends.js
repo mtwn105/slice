@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { User } = require("../schemas");
+const { User, Expense } = require("../schemas");
+const { calculateBalance } = require("./balance");
 
 // Add A Friend
 router.post("/:userId/:friendId", async (req, res) => {
@@ -73,8 +74,23 @@ router.get("/:userId", async (req, res, next) => {
     console.log("Getting User ", userId);
     console.log("Getting Friends ");
     const user = await User.findOne({ _id: userId });
+
     const friends = user.friends;
-    res.json(friends);
+    let friendsWithBalance = [];
+    console.log(friends);
+    for (const friend of friends) {
+      const { userId: friendId, username, name, email } = friend;
+      const expenses = await Expense.find().all("members", [userId, friendId]);
+      const balance = await calculateBalance(userId, friendId, expenses);
+      friendsWithBalance.push({
+        friendId,
+        username,
+        name,
+        email,
+        balance,
+      });
+    }
+    res.json(friendsWithBalance);
   } catch (err) {
     next(err);
   }

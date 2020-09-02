@@ -6,7 +6,7 @@ const authenticateJWT = require("./jwt");
 const authRouter = require("./routes/auth");
 const { router: userRouter } = require("./routes/user");
 const expenseRouter = require("./routes/expense");
-const balanceRouter = require("./routes/balance");
+const { router: balanceRouter } = require("./routes/balance");
 const friendRouter = require("./routes/friends");
 require("dotenv").config();
 

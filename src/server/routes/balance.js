@@ -10,12 +10,8 @@ router.get("/:userOne/:userTwo", async (req, res, next) => {
 
   const expenses = await Expense.find().all("members", [userOne, userTwo]);
 
-  if (expenses.length > 0) {
-    const balance = await calculateBalance(userOne, userTwo, expenses);
-    res.status(200).send({ userOne, userTwo, balance });
-  } else {
-    res.status(204).send();
-  }
+  const balance = await calculateBalance(userOne, userTwo, expenses);
+  res.status(200).send({ userOne, userTwo, balance });
 });
 
 router.get("/:userId", async (req, res, next) => {
@@ -104,4 +100,4 @@ function calculateTotalBalance(userId, expenses) {
   return balance;
 }
 
-module.exports = router;
+module.exports = { router, calculateBalance };
