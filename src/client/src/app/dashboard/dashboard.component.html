@@ -1,1 +1,138 @@
-<p>dashboard works!</p>
+<section class="hero is-link">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">Dashboard</h1>
+    </div>
+  </div>
+</section>
+<div class="container-fluid">
+  <div class="columns top-info-row">
+    <div class="column">
+      <div class="card">
+        <section class="hero is-warning">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">{{ totalBalance | currency: "INR" }}</h1>
+              <h2 *ngIf="totalBalance == 0" class="subtitle">
+                You are settled up
+              </h2>
+              <h2 *ngIf="totalBalance > 0" class="subtitle">
+                You lended {{ totalBalance | currency: "INR" }}
+              </h2>
+              <h2 *ngIf="totalBalance < 0" class="subtitle">
+                You owed {{ totalBalance * -1 | currency: "INR" }}
+              </h2>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <section class="hero is-warning">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">{{ expenses.length }}</h1>
+              <h2 class="subtitle">Total Expenses</h2>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <section class="hero is-warning">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">{{ friends.length }}</h1>
+              <h2 class="subtitle">Total Friends</h2>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="columns expense-friends-row">
+    <div class="column">
+      <div class="card">
+        <section class="card-title-bg-yellow">
+          <div class="">
+            <div class="container-fluid">
+              <h1 class="title">Expenses</h1>
+            </div>
+          </div>
+        </section>
+        <div class="card-content">
+          <div class="content">
+            <ng-container *ngFor="let expense of expenses">
+              <app-expense-item [expense]="expense"></app-expense-item>
+            </ng-container>
+            <ng-container *ngIf="expenses.length == 0">
+              <div class="columns">
+                <div class="column"></div>
+                <div class="column is-auto icon-column">
+                  <span class="icon is-large is-left">
+                    <i class="fa fa-search-dollar"></i>
+                  </span>
+                </div>
+                <div class="column"></div>
+              </div>
+              <div class="columns">
+                <div class="column"></div>
+                <div class="column">
+                  <p class="font-weight-bold">No Expense Found</p>
+                </div>
+                <div class="column"></div>
+              </div>
+            </ng-container>
+
+            <button class="button is-dark is-medium is-fullwidth">
+              Add an expense
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <section class="card-title-bg-yellow">
+          <div class="">
+            <div class="container-fluid">
+              <h1 class="title">Friends</h1>
+            </div>
+          </div>
+        </section>
+        <div class="card-content">
+          <div class="content">
+            <ng-container *ngFor="let friend of friends">
+              <app-friend-item [friend]="friend"></app-friend-item>
+            </ng-container>
+            <ng-container *ngIf="friends.length == 0">
+              <div class="columns">
+                <div class="column"></div>
+                <div class="column is-auto icon-column">
+                  <span class="icon is-large is-left">
+                    <i class="fa fa-search-dollar"></i>
+                  </span>
+                </div>
+                <div class="column"></div>
+              </div>
+              <div class="columns">
+                <div class="column"></div>
+                <div class="column">
+                  <p class="font-weight-bold">No Friends Found</p>
+                </div>
+                <div class="column"></div>
+              </div>
+            </ng-container>
+
+            <button class="button is-dark is-medium is-fullwidth">
+              Add a friend
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

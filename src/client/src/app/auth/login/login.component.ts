@@ -50,16 +50,6 @@ export class LoginComponent implements OnInit {
       },
       (err) => {
         this.loading = false;
-        const position = "is-top";
-        const color = "is-danger";
-        const alertConfig: NwbAlertConfig = {
-          message: `<b>${err.error.error}</b>`,
-          duration: 2000,
-          position,
-          color,
-        };
-
-        this.nwbAlert.open(alertConfig);
       }
     );
   }

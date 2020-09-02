@@ -13,6 +13,12 @@ import { AuthGuard } from "./auth/auth.guard";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { NwbAllModule } from "@wizishop/ng-wizi-bulma";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BalanceService } from "./balance.service";
+import { ExpenseService } from "./expense.service";
+import { FriendsService } from "./friends.service";
+import { HttpRequestInterceptor } from "./http.interceptor";
+import { ExpenseItemComponent } from './dashboard/expense-item/expense-item.component';
+import { FriendItemComponent } from './dashboard/friend-item/friend-item.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +27,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     SignupComponent,
     NavbarComponent,
     DashboardComponent,
+    ExpenseItemComponent,
+    FriendItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +39,18 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     HttpClientModule,
     NwbAllModule,
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true,
+    },
+    AuthService,
+    AuthGuard,
+    BalanceService,
+    ExpenseService,
+    FriendsService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

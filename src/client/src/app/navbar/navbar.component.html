@@ -4,17 +4,11 @@
       <strong>Slice</strong>
     </a>
 
-    <a
-      role="button"
-      class="navbar-burger burger"
-      aria-label="menu"
-      aria-expanded="false"
-      data-target="navbarBasicExample"
-    >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+    <div class="navbar-burger burger" data-target="navbarBasicExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 
   <div id="navbarBasicExample" class="navbar-menu">
@@ -23,6 +17,14 @@
     </div>
 
     <div class="navbar-end">
+      <div class="navbar-item">
+        <p
+          class="text-white m-0 font-weight-bold"
+          *ngIf="authService.userLoggedIn"
+        >
+          {{ authService.name }}
+        </p>
+      </div>
       <div class="navbar-item">
         <div class="buttons">
           <a
@@ -39,6 +41,7 @@
           >
             Log in
           </a>
+
           <a
             (click)="logout()"
             *ngIf="authService.userLoggedIn"

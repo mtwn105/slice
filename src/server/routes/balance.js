@@ -23,12 +23,8 @@ router.get("/:userId", async (req, res, next) => {
 
   const expenses = await Expense.find().all("members", [userId]);
 
-  if (expenses.length > 0) {
-    const balance = await calculateTotalBalance(userId, expenses);
-    res.status(200).send({ userId, balance });
-  } else {
-    res.status(204).send();
-  }
+  const balance = await calculateTotalBalance(userId, expenses);
+  res.status(200).send({ userId, balance });
 });
 
 function calculateBalance(userOne, userTwo, expenses) {
