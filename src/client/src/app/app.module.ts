@@ -20,8 +20,9 @@ import { HttpRequestInterceptor } from "./http.interceptor";
 import { ExpenseItemComponent } from "./dashboard/expense-item/expense-item.component";
 import { FriendItemComponent } from "./dashboard/friend-item/friend-item.component";
 import { AvatarModule } from "ngx-avatar";
-import { FriendsComponent } from './friends/friends.component';
-import { UserItemComponent } from './friends/user-item/user-item.component';
+import { FriendsComponent } from "./friends/friends.component";
+import { UserItemComponent } from "./friends/user-item/user-item.component";
+import { AddExpenseDialogComponent } from "./dashboard/add-expense-dialog/add-expense-dialog.component";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserItemComponent } from './friends/user-item/user-item.component';
     FriendItemComponent,
     FriendsComponent,
     UserItemComponent,
+    AddExpenseDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,5 +60,6 @@ import { UserItemComponent } from './friends/user-item/user-item.component';
     FriendsService,
   ],
   bootstrap: [AppComponent],
+  entryComponents: [AddExpenseDialogComponent],
 })
 export class AppModule {}

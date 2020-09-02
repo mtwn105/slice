@@ -1,0 +1,117 @@
+<form [formGroup]="addExpenseForm" (ngSubmit)="addExpense()">
+  <div class="field">
+    <label class="label">Title</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        [ngClass]="{
+          'is-danger':
+            addExpenseForm.controls.name.dirty &&
+            addExpenseForm.controls.name.errors
+        }"
+        name="name"
+        id="name"
+        class="input"
+        type="text"
+        placeholder="What was this spend for?"
+        formControlName="name"
+      />
+      <span class="icon is-small is-left">
+        <i class="fas fa-heading"></i>
+      </span>
+      <p
+        *ngIf="
+          addExpenseForm.controls.name.dirty &&
+          addExpenseForm.controls.name.errors?.required
+        "
+        class="help is-danger"
+      >
+        Title is required.
+      </p>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Amount</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        [ngClass]="{
+          'is-danger':
+            addExpenseForm.controls.amount.dirty &&
+            addExpenseForm.controls.amount.errors
+        }"
+        name="amount"
+        id="amount"
+        class="input"
+        type="number"
+        placeholder="Enter expense amount"
+        formControlName="amount"
+      />
+      <span class="icon is-small is-left">
+        <i class="fas fa-rupee-sign"></i>
+      </span>
+      <p
+        *ngIf="
+          addExpenseForm.controls.amount.dirty &&
+          addExpenseForm.controls.amount.errors?.required
+        "
+        class="help is-danger"
+      >
+        Amount is required.
+      </p>
+      <p
+        *ngIf="
+          addExpenseForm.controls.amount.dirty &&
+          addExpenseForm.controls.amount.errors?.min
+        "
+        class="help is-danger"
+      >
+        Amount should be greater than ₹1.00.
+      </p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Category</label>
+    <div class="control">
+      <div class="select">
+        <select formControlName="category">
+          <ng-container *ngFor="let category of categories"
+            ><option [value]="category.name">
+              <i class="fa fa-{{ category.icon }}"></i>
+              {{ category.name }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Expense Date</label>
+    <div class="control">
+      <nwb-date-picker
+        [options]="{
+          displayMode: 'dialog'
+        }"
+        #datePicker1
+      >
+        <input
+          [nwbDatepickerStart]="datePicker1"
+          formControlName="expenseDate"
+          type="text"
+          nwbDateType="date"
+        />
+      </nwb-date-picker>
+    </div>
+  </div>
+
+  <div class="field is-grouped has-text-centered">
+    <div class="control">
+      <button
+        type="submit"
+        [ngClass]="{ 'is-loading': loading }"
+        class="button is-link is-medium"
+      >
+        Add an Expense
+      </button>
+    </div>
+  </div>
+</form>

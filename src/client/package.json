@@ -20,6 +20,7 @@
     "@angular/router": "~10.0.14",
     "@wizishop/ng-wizi-bulma": "^10.0.0",
     "bulma": "^0.9.0",
+    "bulma-calendar": "git+https://github.com/WiziShop/bulma-calendar.git",
     "bulma-extensions": "^6.2.7",
     "ngx-avatar": "^4.0.0",
     "rxjs": "~6.6.2",

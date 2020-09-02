@@ -91,10 +91,17 @@
             </ng-container>
 
             <div class="buttons">
-              <button class="button is-dark is-medium is-half">
-                Add an expense</button
-              ><button class="button is-dark is-medium is-half">
+              <button
+                *ngIf="expenses.length > 5"
+                class="button is-primary is-medium is-fullwidth"
+              >
                 View All
+              </button>
+              <button
+                (click)="addExpense()"
+                class="button is-dark is-medium is-fullwidth"
+              >
+                Add an expense
               </button>
             </div>
           </div>
