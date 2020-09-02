@@ -3,6 +3,7 @@ import { AuthService } from "../auth.service";
 import { NwbAlertService, NwbAlertConfig } from "@wizishop/ng-wizi-bulma";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AlertService } from "src/app/alert.service";
 
 @Component({
   selector: "app-signup",
@@ -16,7 +17,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private nwbAlert: NwbAlertService,
+    private alertService: AlertService,
     private router: Router
   ) {}
 
@@ -55,45 +56,19 @@ export class SignupComponent implements OnInit {
     if (
       this.signupForm.value.password != this.signupForm.value.confirmPassword
     ) {
-      const position = "is-top";
-      const color = "is-danger";
-      const alertConfig: NwbAlertConfig = {
-        message: `<b>Passwords must match</b>`,
-        duration: 2000,
-        position,
-        color,
-      };
-      this.nwbAlert.open(alertConfig);
+      this.alertService.showMessage("Passwords must match", true);
       return;
     }
     this.loading = true;
     this.authService.signup(this.signupForm.value).subscribe(
       (res: any) => {
         this.loading = false;
-        const position = "is-top";
-        const color = "is-success";
-        const alertConfig: NwbAlertConfig = {
-          message: "Signed Up In Successfully",
-          duration: 2000,
-          position,
-          color,
-        };
+        this.alertService.showMessage("Signed Up In Successfully", false);
 
-        this.nwbAlert.open(alertConfig);
         this.router.navigateByUrl("/login");
       },
       (err) => {
         this.loading = false;
-        const position = "is-top";
-        const color = "is-danger";
-        const alertConfig: NwbAlertConfig = {
-          message: `<b>${err.error.error}</b>`,
-          duration: 2000,
-          position,
-          color,
-        };
-
-        this.nwbAlert.open(alertConfig);
       }
     );
   }

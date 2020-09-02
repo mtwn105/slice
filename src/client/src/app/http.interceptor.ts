@@ -14,10 +14,11 @@ import {
   NwbAlertService,
   NwbAlertConfig,
 } from "@wizishop/ng-wizi-bulma";
+import { AlertService } from "./alert.service";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
-  constructor(public auth: AuthService, public nwbAlert: NwbAlertService) {}
+  constructor(public auth: AuthService, public alertService: AlertService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -32,16 +33,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         const errorMsg = error.error.error;
-        const position = "is-top";
-        const color = "is-danger";
-        const alertConfig: NwbAlertConfig = {
-          message: `<b>${error.error.error}</b>`,
-          duration: 2000,
-          position,
-          color,
-        };
-
-        this.nwbAlert.open(alertConfig);
+        this.alertService.showMessage(errorMsg, true);
         return throwError(errorMsg);
       })
     );

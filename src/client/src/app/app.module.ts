@@ -20,6 +20,8 @@ import { HttpRequestInterceptor } from "./http.interceptor";
 import { ExpenseItemComponent } from "./dashboard/expense-item/expense-item.component";
 import { FriendItemComponent } from "./dashboard/friend-item/friend-item.component";
 import { AvatarModule } from "ngx-avatar";
+import { FriendsComponent } from './friends/friends.component';
+import { UserItemComponent } from './friends/user-item/user-item.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { AvatarModule } from "ngx-avatar";
     DashboardComponent,
     ExpenseItemComponent,
     FriendItemComponent,
+    FriendsComponent,
+    UserItemComponent,
   ],
   imports: [
     BrowserModule,

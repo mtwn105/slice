@@ -3,6 +3,7 @@ import { BalanceService } from "../balance.service";
 import { ExpenseService } from "../expense.service";
 import { FriendsService } from "../friends.service";
 import { NwbAlertService, NwbAlertConfig } from "@wizishop/ng-wizi-bulma";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-dashboard",
@@ -15,6 +16,7 @@ export class DashboardComponent implements OnInit {
   friends = [];
 
   constructor(
+    public router: Router,
     private nwbAlert: NwbAlertService,
     private balanceService: BalanceService,
     private expenseService: ExpenseService,

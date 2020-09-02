@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { NwbAlertConfig, NwbAlertService } from "@wizishop/ng-wizi-bulma";
 import { Router } from "@angular/router";
+import { AlertService } from "src/app/alert.service";
 
 @Component({
   selector: "app-login",
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private nwbAlert: NwbAlertService,
+    private alertService: AlertService,
     private router: Router
   ) {}
 
@@ -28,16 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.username, this.password).subscribe(
       (res: any) => {
         this.loading = false;
-        const position = "is-top";
-        const color = "is-success";
-        const alertConfig: NwbAlertConfig = {
-          message: "Logged In Successfully",
-          duration: 2000,
-          position,
-          color,
-        };
-
-        this.nwbAlert.open(alertConfig);
+        this.alertService.showMessage("Logged In Successfully", false);
 
         localStorage.setItem("isUserLoggedIn", "true");
         localStorage.setItem("username", res.username);

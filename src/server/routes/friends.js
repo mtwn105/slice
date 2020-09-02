@@ -12,14 +12,24 @@ router.post("/:userId/:friendId", async (req, res) => {
   const user = await User.findOne({ _id: userId });
   const friend = await User.findOne({ _id: friendId });
   const friends = user.friends;
+  console.log("Friends", friends);
   if (!friend) {
     res.status(400).json({
       error: "Invalid Friend",
       message: `No user exists with id ${friendId}`,
     });
   } else {
-    if (friends.includes(friendId)) {
-      res.json({
+    console.log(
+      friends.filter(
+        (friend) => friend.userId.toString() == friendId.toString()
+      ).length > 0
+    );
+    if (
+      friends.filter(
+        (friend) => friend.userId.toString() == friendId.toString()
+      ).length > 0
+    ) {
+      res.status(422).json({
         error: "Friend Already Added",
         message: "Friend Already Added",
       });

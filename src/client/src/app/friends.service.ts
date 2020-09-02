@@ -12,8 +12,19 @@ export class FriendsService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getFriends(): any {
-    return this.http.get(
-      `${this.appUrl}/friends/${localStorage.getItem("userId")}`
+    return this.http.get(`${this.appUrl}/friends/${this.authService.userId}`);
+  }
+
+  addFriend(friendId): any {
+    return this.http.post(
+      `${this.appUrl}/friends/${this.authService.userId}/${friendId}`,
+      {}
+    );
+  }
+
+  removeFriend(friendId): any {
+    return this.http.delete(
+      `${this.appUrl}/friends/${this.authService.userId}/${friendId}`
     );
   }
 }

@@ -4,6 +4,7 @@ import { LoginComponent } from "./auth/login/login.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AuthGuard } from "./auth/auth.guard";
 import { SignupComponent } from "./auth/signup/signup.component";
+import { FriendsComponent } from "./friends/friends.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
     path: "dashboard",
     canActivate: [AuthGuard],
     component: DashboardComponent,
+  },
+  {
+    path: "friends",
+    canActivate: [AuthGuard],
+    component: FriendsComponent,
   },
 ];
 

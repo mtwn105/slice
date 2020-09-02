@@ -13,7 +13,22 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item"> Home </a>
+      <a
+        *ngIf="authService.userLoggedIn"
+        routerLink="/dashboard"
+        [ngClass]="{ 'is-active': router.url.includes('dashboard') }"
+        class="navbar-item"
+      >
+        Home
+      </a>
+      <a
+        *ngIf="authService.userLoggedIn"
+        routerLink="/friends"
+        [ngClass]="{ 'is-active': router.url.includes('friends') }"
+        class="navbar-item"
+      >
+        Friends
+      </a>
     </div>
 
     <div class="navbar-end">

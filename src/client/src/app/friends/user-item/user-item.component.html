@@ -1,0 +1,43 @@
+<article class="media user-item">
+  <div class="media-left">
+    <ngx-avatar
+      [name]="user.name"
+      value="28%"
+      size="50"
+      [round]="true"
+    ></ngx-avatar>
+  </div>
+  <div class="media-content">
+    <div class="content">
+      <p class="mb-0">
+        <strong>{{ user.name }}</strong>
+        <small>@{{ user.username }}</small>
+        <br />
+        <small>Email: {{ user.email }}</small>
+        <br />
+      </p>
+    </div>
+  </div>
+  <div class="media-right">
+    <button
+      (click)="addFriend()"
+      *ngIf="!isFriend"
+      class="button is-success is-outlined"
+    >
+      <span class="icon is-small">
+        <i class="fas fa-check"></i>
+      </span>
+      <span>Add</span>
+    </button>
+    <button
+      (click)="removeFriend()"
+      *ngIf="isFriend"
+      class="button is-danger is-outlined"
+    >
+      <span class="icon is-small">
+        <i class="fas fa-times"></i>
+      </span>
+      <span>Remove</span>
+    </button>
+  </div>
+</article>
