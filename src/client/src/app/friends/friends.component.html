@@ -6,14 +6,6 @@
   </div>
 </section>
 <div class="container-fluid friends-div">
-  <!-- <div class="field is-grouped">
-    <p class="control is-expanded">
-      <input class="input" type="text" placeholder="Find an user" />
-    </p>
-    <p class="control">
-      <a class="button is-info"> Search </a>
-    </p>
-  </div> -->
   <article class="panel is-primary">
     <div class="panel-block">
       <p class="control has-icons-left">
@@ -31,8 +23,9 @@
     </div>
     <div *ngFor="let user of filteredUsers; let i = index" class="panel-block">
       <app-user-item
-        *ngIf="i < 10"
+        *ngIf="i < 10 && user._id != authService.userId"
         [isFriend]="checkIfFriend(user._id)"
+        [showAddFriendButton]="true"
         [user]="user"
       ></app-user-item>
     </div>

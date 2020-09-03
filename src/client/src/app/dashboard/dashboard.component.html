@@ -90,18 +90,18 @@
               </div>
             </ng-container>
 
-            <div class="buttons">
-              <button
-                *ngIf="expenses.length > 5"
-                class="button is-primary is-medium is-fullwidth"
-              >
-                View All
-              </button>
+            <div class="columns is-centered">
               <button
                 (click)="addExpense()"
-                class="button is-dark is-medium is-fullwidth"
+                class="button is-dark is-medium is-fullwidth is-marginless mx-2 my-2"
               >
                 Add an expense
+              </button>
+              <button
+                *ngIf="expenses.length > 5"
+                class="button is-primary is-medium is-fullwidth mx-2 my-2"
+              >
+                View All
               </button>
             </div>
           </div>

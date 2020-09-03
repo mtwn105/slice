@@ -20,25 +20,39 @@
     </div>
   </div>
   <div class="media-right">
-    <button
-      (click)="addFriend()"
-      *ngIf="!isFriend"
-      class="button is-success is-outlined"
-    >
-      <span class="icon is-small">
-        <i class="fas fa-check"></i>
-      </span>
-      <span>Add</span>
-    </button>
-    <button
-      (click)="removeFriend()"
-      *ngIf="isFriend"
-      class="button is-danger is-outlined"
-    >
-      <span class="icon is-small">
-        <i class="fas fa-times"></i>
-      </span>
-      <span>Remove</span>
-    </button>
+    <ng-container *ngIf="showAddFriendButton">
+      <button
+        (click)="addFriend()"
+        *ngIf="!isFriend"
+        class="button is-success is-outlined"
+      >
+        <span class="icon is-small">
+          <i class="fas fa-check"></i>
+        </span>
+        <span>Add</span>
+      </button>
+      <button
+        (click)="removeFriend()"
+        *ngIf="isFriend"
+        class="button is-danger is-outlined"
+      >
+        <span class="icon is-small">
+          <i class="fas fa-times"></i>
+        </span>
+        <span>Remove</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="showAddUserButton">
+      <button
+        (click)="addUser()"
+        *ngIf="!isFriend"
+        class="button is-success is-outlined"
+      >
+        <span class="icon is-small">
+          <i class="fas fa-check"></i>
+        </span>
+        <span>Add</span>
+      </button>
+    </ng-container>
   </div>
 </article>

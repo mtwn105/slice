@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
       this.expenseDialogConfig
     );
 
-    // dialog.componentInstance.myInput.nativeElement.value = "Random text";
+    dialog.componentInstance.friends = this.friends;
 
     dialog.afterClosed().subscribe((addExpense) => {
       if (addExpense) {

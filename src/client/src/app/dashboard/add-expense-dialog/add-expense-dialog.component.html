@@ -1,4 +1,4 @@
-<form [formGroup]="addExpenseForm" (ngSubmit)="addExpense()">
+<form [formGroup]="addExpenseForm">
   <div class="field">
     <label class="label">Title</label>
     <div class="control has-icons-left has-icons-right">
@@ -84,12 +84,38 @@
       </div>
     </div>
   </div>
+  <label class="label">Members</label>
+  <div class="field is-grouped is-grouped-multiline">
+    <div *ngFor="let member of members; let i = index" class="control">
+      <div class="tags has-addons">
+        <span class="tag is-link is-medium"
+          >{{ member.name }}
+          <button
+            (click)="removeMember(member)"
+            *ngIf="member.id != authService.userId"
+            class="delete is-small"
+          ></button>
+        </span>
+      </div>
+    </div>
+    <div class="control">
+      <div class="tags has-addons">
+        <span
+          *ngIf="members.length != friends.length + 1"
+          (click)="addMember()"
+          class="tag button is-success is-medium"
+          >Add
+        </span>
+      </div>
+    </div>
+  </div>
   <div class="field">
     <label class="label">Expense Date</label>
     <div class="control">
       <nwb-date-picker
         [options]="{
-          displayMode: 'dialog'
+          displayMode: 'dialog',
+          showClearButton: false
         }"
         #datePicker1
       >
@@ -106,7 +132,8 @@
   <div class="field is-grouped has-text-centered">
     <div class="control">
       <button
-        type="submit"
+        (click)="addExpense()"
+        type="button"
         [ngClass]="{ 'is-loading': loading }"
         class="button is-link is-medium"
       >

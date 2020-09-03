@@ -23,6 +23,7 @@ import { AvatarModule } from "ngx-avatar";
 import { FriendsComponent } from "./friends/friends.component";
 import { UserItemComponent } from "./friends/user-item/user-item.component";
 import { AddExpenseDialogComponent } from "./dashboard/add-expense-dialog/add-expense-dialog.component";
+import { FindUserDialogComponent } from './dashboard/add-expense-dialog/find-user-dialog/find-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AddExpenseDialogComponent } from "./dashboard/add-expense-dialog/add-ex
     FriendsComponent,
     UserItemComponent,
     AddExpenseDialogComponent,
+    FindUserDialogComponent,
   ],
   imports: [
     BrowserModule,

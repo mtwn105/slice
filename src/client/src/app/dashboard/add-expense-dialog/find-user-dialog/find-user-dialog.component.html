@@ -1,0 +1,25 @@
+<article class="panel is-primary">
+  <div class="panel-block">
+    <p class="control has-icons-left">
+      <input
+        (input)="filterUsers($event)"
+        [(ngModel)]="searchTerm"
+        class="input is-primary"
+        type="text"
+        placeholder="Search"
+      />
+      <span class="icon is-left">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </span>
+    </p>
+  </div>
+  <div *ngFor="let user of filteredUsers; let i = index" class="panel-block">
+    <app-user-item
+      *ngIf="i < 10"
+      [showAddFriendButton]="false"
+      [showAddUserButton]="true"
+      [user]="user"
+      (selectUser)="selectUser($event)"
+    ></app-user-item>
+  </div>
+</article>

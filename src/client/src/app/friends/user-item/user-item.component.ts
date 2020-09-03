@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FriendsService } from "src/app/friends.service";
 import { AlertService } from "src/app/alert.service";
 import { NwbDialogConfig, NwbDialogService } from "@wizishop/ng-wizi-bulma";
@@ -12,6 +12,9 @@ import { Router } from "@angular/router";
 export class UserItemComponent implements OnInit {
   @Input() user;
   @Input() isFriend;
+  @Input() showAddUserButton;
+  @Input() showAddFriendButton;
+  @Output() selectUser = new EventEmitter<any>();
 
   addFriendDialogConfig: NwbDialogConfig = {
     title: "Add Friend",
@@ -54,5 +57,9 @@ export class UserItemComponent implements OnInit {
         this.router.navigateByUrl("/dashboard");
       })
     );
+  }
+
+  addUser() {
+    this.selectUser.emit(this.user);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../user.service";
 import { FriendsService } from "../friends.service";
+import { AuthService } from "../auth/auth.service";
 
 @Component({
   selector: "app-friends",
@@ -15,7 +16,8 @@ export class FriendsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private friendsService: FriendsService
+    private friendsService: FriendsService,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
