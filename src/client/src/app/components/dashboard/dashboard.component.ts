@@ -10,6 +10,7 @@ import { AddExpenseDialogComponent } from "./add-expense-dialog/add-expense-dial
 import { BalanceService } from "src/app/services/balance.service";
 import { ExpenseService } from "src/app/services/expense.service";
 import { FriendsService } from "src/app/services/friends.service";
+import { AlertService } from "src/app/services/alert.service";
 
 @Component({
   selector: "app-dashboard",
@@ -27,7 +28,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private nwbAlert: NwbAlertService,
+    private alertService: AlertService,
     private nwbDialog: NwbDialogService,
     private balanceService: BalanceService,
     private expenseService: ExpenseService,
@@ -57,6 +58,14 @@ export class DashboardComponent implements OnInit {
   }
 
   addExpense() {
+    if (this.friends.length < 1) {
+      this.alertService.showMessage(
+        "Add atleast one friend before adding expense",
+        true
+      );
+      return;
+    }
+
     const dialog = this.nwbDialog.openFromComponent(
       AddExpenseDialogComponent,
       this.expenseDialogConfig
