@@ -1,0 +1,142 @@
+<div *ngIf="calculateTotal() != amount" class="notification is-danger">
+  <b>Total is incorrect</b>
+</div>
+<div class="field">
+  <p class="control is-expanded is-medium">
+    <label class="checkbox">
+      <input
+        (change)="
+          splitEqually ? performSplitEqually() : performSplitUnequally()
+        "
+        class="main-checkbox mx-2"
+        [(ngModel)]="splitEqually"
+        type="checkbox"
+      />Split Equally
+    </label>
+  </p>
+</div>
+<table class="split-table">
+  <thead>
+    <tr>
+      <th>Payer</th>
+      <th>Name</th>
+      <th>Split</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let payer of payers">
+      <td>
+        <div class="field">
+          <p class="control is-expanded is-medium">
+            <input
+              (change)="
+                splitEqually ? performSplitEqually() : performSplitUnequally()
+              "
+              class="main-checkbox"
+              [(ngModel)]="payer.isPayer"
+              type="checkbox"
+            />
+          </p>
+        </div>
+      </td>
+      <td>
+        <div class="field">
+          <p class="control is-expanded has-icons-left">
+            <input
+              [(ngModel)]="payer.name"
+              class="input"
+              type="text"
+              placeholder="Name"
+              readonly
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </p>
+        </div>
+      </td>
+      <td>
+        <div class="field">
+          <div class="control has-icons-left has-icons-right">
+            <input
+              [ngClass]="{ 'is-danger': payer.isPayer && payer.amount == 0 }"
+              name="amount"
+              id="amount"
+              class="input"
+              type="number"
+              placeholder="Enter expense amount"
+              [(ngModel)]="payer.amount"
+              min="1"
+              [readonly]="splitEqually"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-rupee-sign"></i>
+            </span>
+            <p
+              *ngIf="
+                payer.isPayer && (payer.amount <= 0 || payer.amount == null)
+              "
+              class="help is-danger"
+            >
+              Amount is required for the payer.
+            </p>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="field is-grouped has-text-centered">
+  <div class="control">
+    <button
+      (click)="saveSplit()"
+      type="button"
+      class="button is-link is-medium"
+    >
+      Save
+    </button>
+  </div>
+</div>
+<!-- <div class="field is-horizontal">
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded is-medium">
+        <input
+          class="main-checkbox"
+          [(ngModel)]="payer.isPayer"
+          type="checkbox"
+        />
+      </p>
+    </div>
+    <div class="field">
+      <p class="control is-expanded has-icons-left">
+        <input
+          [(ngModel)]="payer.name"
+          class="input"
+          type="text"
+          placeholder="Name"
+          readonly
+        />
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field">
+      <p class="control has-icons-left">
+        <input
+          name="split"
+          [ngModel]="(payer.percentage / 100) * amount | currency: 'INR'"
+          (ngModelChange)="payer.percentage = $event"
+          class="input"
+          type="text"
+          placeholder="Split"
+          readonly
+        />
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+      </p>
+    </div>
+  </div>
+</div> -->

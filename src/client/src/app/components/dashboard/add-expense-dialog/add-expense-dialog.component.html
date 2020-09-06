@@ -38,10 +38,12 @@
             addExpenseForm.controls.amount.dirty &&
             addExpenseForm.controls.amount.errors
         }"
+        (input)="calculateSplits()"
         name="amount"
         id="amount"
         class="input"
         type="number"
+        min="1"
         placeholder="Enter expense amount"
         formControlName="amount"
       />
@@ -105,6 +107,52 @@
           (click)="addMember()"
           class="tag button is-success is-medium"
           >Add
+        </span>
+      </div>
+    </div>
+  </div>
+  <label class="label">Payers</label>
+  <div class="field is-grouped is-grouped-multiline">
+    <ng-container *ngFor="let payer of payers; let i = index">
+      <div *ngIf="payer.isPayer" class="control">
+        <div class="tags has-addons">
+          <span class="tag is-link is-medium"
+            >{{ payer.name }}
+            {{
+              (payer.percentage / 100) * addExpenseForm.get("amount").value
+                | currency: "INR"
+            }}</span
+          >
+        </div>
+      </div>
+    </ng-container>
+    <div class="control">
+      <div class="tags has-addons">
+        <span (click)="editPayers()" class="tag button is-success is-medium"
+          >Edit Payers
+        </span>
+      </div>
+    </div>
+  </div>
+  <label class="label">Payers</label>
+  <div class="field is-grouped is-grouped-multiline">
+    <ng-container *ngFor="let payer of payers; let i = index">
+      <div *ngIf="payer.isPayer" class="control">
+        <div class="tags has-addons">
+          <span class="tag is-link is-medium"
+            >{{ payer.name }}
+            {{
+              (payer.percentage / 100) * addExpenseForm.get("amount").value
+                | currency: "INR"
+            }}</span
+          >
+        </div>
+      </div>
+    </ng-container>
+    <div class="control">
+      <div class="tags has-addons">
+        <span (click)="editPayers()" class="tag button is-success is-medium"
+          >Edit Payers
         </span>
       </div>
     </div>

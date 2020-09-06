@@ -25,6 +25,9 @@ import { BalanceService } from "./services/balance.service";
 import { ExpenseService } from "./services/expense.service";
 import { FriendsService } from "./services/friends.service";
 import { LoaderService } from "./services/loader.service";
+import { LoaderComponent } from './components/loader/loader.component';
+import { ManagePayersDialogComponent } from './components/dashboard/add-expense-dialog/manage-payers-dialog/manage-payers-dialog.component';
+import { ManageSplitDialogComponent } from './components/dashboard/add-expense-dialog/manage-split-dialog/manage-split-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { LoaderService } from "./services/loader.service";
     UserItemComponent,
     AddExpenseDialogComponent,
     FindUserDialogComponent,
+    LoaderComponent,
+    ManagePayersDialogComponent,
+    ManageSplitDialogComponent,
   ],
   imports: [
     BrowserModule,

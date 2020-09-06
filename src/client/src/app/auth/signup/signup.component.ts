@@ -48,7 +48,6 @@ export class SignupComponent implements OnInit {
 
   signup() {
     this.formSubmitted = true;
-    console.log(this.signupForm.value);
     if (this.signupForm.invalid) {
       return;
     }
