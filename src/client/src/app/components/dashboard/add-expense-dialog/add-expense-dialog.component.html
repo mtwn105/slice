@@ -1,4 +1,4 @@
-<form [formGroup]="addExpenseForm">
+<form [formGroup]="addExpenseForm" (ngSubmit)="addExpense()">
   <div class="field">
     <label class="label">Title</label>
     <div class="control has-icons-left has-icons-right">
@@ -134,15 +134,15 @@
       </div>
     </div>
   </div>
-  <label class="label">Payers</label>
+  <label class="label">Split</label>
   <div class="field is-grouped is-grouped-multiline">
-    <ng-container *ngFor="let payer of payers; let i = index">
-      <div *ngIf="payer.isPayer" class="control">
+    <ng-container *ngFor="let split of splits; let i = index">
+      <div class="control">
         <div class="tags has-addons">
           <span class="tag is-link is-medium"
-            >{{ payer.name }}
+            >{{ split.name }}
             {{
-              (payer.percentage / 100) * addExpenseForm.get("amount").value
+              (split.percentage / 100) * addExpenseForm.get("amount").value
                 | currency: "INR"
             }}</span
           >
@@ -151,8 +151,8 @@
     </ng-container>
     <div class="control">
       <div class="tags has-addons">
-        <span (click)="editPayers()" class="tag button is-success is-medium"
-          >Edit Payers
+        <span (click)="editSplit()" class="tag button is-success is-medium"
+          >Edit Split
         </span>
       </div>
     </div>
@@ -180,8 +180,6 @@
   <div class="field is-grouped has-text-centered">
     <div class="control">
       <button
-        (click)="addExpense()"
-        type="button"
         [ngClass]="{ 'is-loading': loading }"
         class="button is-link is-medium"
       >

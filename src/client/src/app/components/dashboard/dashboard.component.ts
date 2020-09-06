@@ -63,10 +63,18 @@ export class DashboardComponent implements OnInit {
     );
 
     dialog.componentInstance.friends = this.friends;
+    dialog.componentInstance.addedExpense.subscribe((res) =>
+      dialog.dismiss(true)
+    );
 
     dialog.afterClosed().subscribe((addExpense) => {
       if (addExpense) {
         const addExpenseFormValue = dialog.componentInstance.expense;
+        if (addExpenseFormValue) {
+          this.getExpenses();
+          this.getTotalBalance();
+          this.getFriends();
+        }
       }
     });
   }

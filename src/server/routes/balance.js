@@ -8,7 +8,7 @@ router.get("/:userOne/:userTwo", async (req, res, next) => {
   const userOne = req.params.userOne;
   const userTwo = req.params.userTwo;
 
-  const expenses = await Expense.find().all("members", [userOne, userTwo]);
+  const expenses = await Expense.find().all("members.id", [userOne, userTwo]);
 
   const balance = await calculateBalance(userOne, userTwo, expenses);
   res.status(200).send({ userOne, userTwo, balance });
@@ -17,7 +17,7 @@ router.get("/:userOne/:userTwo", async (req, res, next) => {
 router.get("/:userId", async (req, res, next) => {
   const userId = req.params.userId;
 
-  const expenses = await Expense.find().all("members", [userId]);
+  const expenses = await Expense.find().all("members.id", [userId]);
 
   const balance = await calculateTotalBalance(userId, expenses);
   res.status(200).send({ userId, balance });
@@ -78,26 +78,34 @@ function calculateTotalBalance(userId, expenses) {
   let balance = 0;
 
   for (const expense of expenses) {
-    // Amount of Expense
-    const amount = +expense.amount;
-
-    const isUserOnePayer = expense.payers.find((payer) => payer.user == userId);
-
-    // Users Splits
-    const userOneSplit = expense.split.find((split) => split.user == userId);
-
-    if (isUserOnePayer) {
-      const userPayPercentage = isUserOnePayer.percentage;
-      const userPayment = (amount * userPayPercentage) / 100;
-      const userLendToOtherUser =
-        userPayment - (amount * userOneSplit.percentage) / 100;
-      balance += userLendToOtherUser;
-    } else {
-      balance -= (amount * userOneSplit.percentage) / 100;
-    }
+    balance += calculateBalanceForExpense(userId, expense);
   }
 
   return balance;
 }
 
-module.exports = { router, calculateBalance };
+function calculateBalanceForExpense(userId, expense) {
+  let balance = 0;
+
+  // Amount of Expense
+  const amount = +expense.amount;
+
+  const isUserOnePayer = expense.payers.find((payer) => payer.user == userId);
+
+  // Users Splits
+  const userOneSplit = expense.split.find((split) => split.user == userId);
+
+  if (isUserOnePayer) {
+    const userPayPercentage = isUserOnePayer.percentage;
+    const userPayment = (amount * userPayPercentage) / 100;
+    const userLendToOtherUser =
+      userPayment - (amount * userOneSplit.percentage) / 100;
+    balance += userLendToOtherUser;
+  } else {
+    balance -= (amount * userOneSplit.percentage) / 100;
+  }
+
+  return balance;
+}
+
+module.exports = { router, calculateBalance, calculateBalanceForExpense };

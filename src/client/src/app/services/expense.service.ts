@@ -16,4 +16,8 @@ export class ExpenseService {
       `${this.appUrl}/expense/${localStorage.getItem("userId")}`
     );
   }
+
+  addExpense(expense) {
+    return this.http.post(`${this.appUrl}/expense`, expense);
+  }
 }

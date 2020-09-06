@@ -40,6 +40,7 @@ const Group = mongoose.model("Group", groupSchema, "groups");
 // Split Schema
 
 const splitSchema = new Schema({
+  name: { type: String, required: true },
   user: { type: String, required: true },
   percentage: { type: Number, required: true },
 });
@@ -53,7 +54,7 @@ const expenseSchema = new Schema({
   amount: { type: Number, required: true, min: 1 },
   groupId: { type: String },
   category: { type: String },
-  members: { type: [String], required: true },
+  members: { type: [{ id: String, name: String }], required: true },
   payers: { type: [splitSchema], required: true },
   split: { type: [splitSchema], required: true },
   expenseDate: { type: Date, default: Date.now },

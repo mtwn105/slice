@@ -59,7 +59,10 @@
         <div class="field">
           <div class="control has-icons-left has-icons-right">
             <input
-              [ngClass]="{ 'is-danger': payer.isPayer && payer.amount == 0 }"
+              [ngClass]="{
+                'is-danger':
+                  payer.isPayer && (payer.amount == 0 || payer.amount == null)
+              }"
               name="amount"
               id="amount"
               class="input"
@@ -84,6 +87,11 @@
         </div>
       </td>
     </tr>
+    <tr>
+      <th></th>
+      <th>Total</th>
+      <th>{{ calculateTotal() | currency: "INR" }}</th>
+    </tr>
   </tbody>
 </table>
 <div class="field is-grouped has-text-centered">
@@ -97,46 +105,3 @@
     </button>
   </div>
 </div>
-<!-- <div class="field is-horizontal">
-  <div class="field-body">
-    <div class="field">
-      <p class="control is-expanded is-medium">
-        <input
-          class="main-checkbox"
-          [(ngModel)]="payer.isPayer"
-          type="checkbox"
-        />
-      </p>
-    </div>
-    <div class="field">
-      <p class="control is-expanded has-icons-left">
-        <input
-          [(ngModel)]="payer.name"
-          class="input"
-          type="text"
-          placeholder="Name"
-          readonly
-        />
-        <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
-        </span>
-      </p>
-    </div>
-    <div class="field">
-      <p class="control has-icons-left">
-        <input
-          name="split"
-          [ngModel]="(payer.percentage / 100) * amount | currency: 'INR'"
-          (ngModelChange)="payer.percentage = $event"
-          class="input"
-          type="text"
-          placeholder="Split"
-          readonly
-        />
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-      </p>
-    </div>
-  </div>
-</div> -->

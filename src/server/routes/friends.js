@@ -90,7 +90,10 @@ router.get("/:userId", async (req, res, next) => {
     console.log(friends);
     for (const friend of friends) {
       const { userId: friendId, username, name, email } = friend;
-      const expenses = await Expense.find().all("members", [userId, friendId]);
+      const expenses = await Expense.find().all("members.id", [
+        userId,
+        friendId,
+      ]);
       const balance = await calculateBalance(userId, friendId, expenses);
       friendsWithBalance.push({
         friendId,

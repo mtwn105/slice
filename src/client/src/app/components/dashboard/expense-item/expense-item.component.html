@@ -1,1 +1,33 @@
-<h1 class="subtitle">{{ expense.name }}</h1>
+<div class="box">
+  <article class="media">
+    <div class="media-left">
+      <ngx-avatar
+        [name]="expense.expense.name"
+        value="40%"
+        size="80"
+        [round]="true"
+      ></ngx-avatar>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p class="mb-0">
+          <strong>{{ expense.expense.name }}</strong>
+          <br />
+          <span>
+            <ng-container *ngFor="let member of expense.expense.members">
+              {{ member.name }},
+            </ng-container>
+          </span>
+          <br />
+        </p>
+        <p *ngIf="expense.balance == 0" class="subtitle">You are settled up</p>
+        <p *ngIf="expense.balance > 0" class="subtitle">
+          You lended {{ expense.balance | currency: "INR" }}
+        </p>
+        <p *ngIf="expense.balance < 0" class="subtitle">
+          You owed {{ expense.balance * -1 | currency: "INR" }}
+        </p>
+      </div>
+    </div>
+  </article>
+</div>
