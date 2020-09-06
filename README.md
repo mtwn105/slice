@@ -9,6 +9,7 @@
 - [x] Login/Signup with JWT token implementation
 - [x] Add other users as a friend
 - [x] Add an Expense and split among friends
+- [ ] Manage Expenses (Edit and Delete)
 
 #### Tech Stack:
 
@@ -17,7 +18,6 @@
 - Angular
 
 #### Database Structure
-
 
 ![database-structure](https://app.lucidchart.com/publicSegments/view/15abc59b-5ed6-4cdd-a18f-2364474c6ef1/image.png)
 
@@ -54,6 +54,10 @@
 - Navigate to src/client
 - Run `npm install` to install all dependencies
 - Run `npm run start` to start the angular app.
+
+#### API Docs
+
+You can find API Docs [here](https://slice-api-docs.netlify.app/)
 
 #### Contributing
 

@@ -5,7 +5,71 @@ const router = express.Router();
 const { User } = require("../schemas");
 const { checkIfUserAlreadyExists } = require("./user");
 
+/**
+ * @apiDefine UserAlreadyExistsError
+ *
+ * @apiError UserAlreadyExist User already Exists
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "User Already Exists",
+ *       "message": "User with username abc or email abc already exists"
+ *     }
+ *
+ */
+
+/**
+ * @apiDefine InvalidCredentialsError
+ *
+ * @apiError InvalidCredentials Invalid Credentials
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 401 Unauthorized
+ *     {
+ *       "error": "Invalid Credentials",
+ *       "message": "Invalid username or password"
+ *     }
+ *
+ */
+
+/**
+ * @apiDefine UserNotFoundError
+ *
+ * @apiError UserNotFound User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "User not found."
+ *     }
+ */
+
 // Signup User
+
+/**
+ * @api {post} /auth/signup Signup User
+ * @apiName Signup User
+ * @apiGroup Auth
+ *
+ * @apiParam {String} username Username of the user
+ * @apiParam {String} name Name of the user
+ * @apiParam {String} password Password of the user
+ * @apiParam {String} email Email of the user
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 201 Created
+ *     {
+ *        "_id": "1234",
+ *        "username": "mtwn105",
+ *        "name": "Amit",
+ *        "email": "mtwn105@gmail.com",
+ *        "password": "1234",
+ *     }
+ *
+ * @apiUse UserAlreadyExistsError
+ *
+ */
 router.post("/signup", async (req, res, next) => {
   const userObj = req.body;
 
@@ -41,6 +105,28 @@ router.post("/signup", async (req, res, next) => {
 });
 
 // Login User
+
+/**
+ * @api {post} /auth/login Login User
+ * @apiName Login User
+ * @apiGroup Auth
+ *
+ * @apiParam {String} username Username of the user
+ * @apiParam {String} password Password of the user
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *        "_id": "1234",
+ *        "username": "mtwn105",
+ *        "name": "Amit",
+ *        "email": "mtwn105@gmail.com",
+ *        "token": "adasdasdxczxcawdeqwscascasd",
+ *     }
+ *
+ *  @apiUse InvalidCredentialsError
+ *  @apiUse UserNotFoundError
+ */
 router.post("/login", async (req, res, next) => {
   const userObj = req.body;
 
@@ -80,7 +166,7 @@ router.post("/login", async (req, res, next) => {
       }
     });
   } else {
-    res.status(401).json({
+    res.status(404).json({
       error: "User Not Found",
       message: `User with username ${userObj.username} not found`,
     });

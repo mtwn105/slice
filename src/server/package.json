@@ -1,15 +1,20 @@
 {
   "name": "slice",
   "version": "1.0.0",
-  "description": "",
+  "description": "Slice - Split Bills with Friends",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
+  "apidoc": {
+    "title": "Slice - Split Bills with Friends",
+    "url": "https://slice-nodejs.herokuapp.com/api/v1",
+    "version": "1.0.0"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Amit Wani",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
