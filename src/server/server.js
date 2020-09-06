@@ -20,11 +20,11 @@ connectDB();
 
 // Routers
 
-app.use("/auth", authRouter);
-app.use("/users", authenticateJWT, userRouter);
-app.use("/friends", authenticateJWT, friendRouter);
-app.use("/expense", authenticateJWT, expenseRouter);
-app.use("/balance", authenticateJWT, balanceRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", authenticateJWT, userRouter);
+app.use("/api/v1/friends", authenticateJWT, friendRouter);
+app.use("/api/v1/expense", authenticateJWT, expenseRouter);
+app.use("/api/v1/balance", authenticateJWT, balanceRouter);
 
 // Error Handler
 function notFound(req, res, next) {
