@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { ExpenseService } from "src/app/expense.service";
 import { Expense } from "src/app/models/expense";
 import { Constants } from "src/app/constants/constants";
 import { AuthService } from "src/app/auth/auth.service";
 import { NwbDialogConfig, NwbDialogService } from "@wizishop/ng-wizi-bulma";
 import { FindUserDialogComponent } from "./find-user-dialog/find-user-dialog.component";
+import { ExpenseService } from "src/app/services/expense.service";
 
 @Component({
   selector: "app-add-expense-dialog",

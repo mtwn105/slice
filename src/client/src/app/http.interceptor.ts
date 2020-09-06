@@ -10,15 +10,9 @@ import {
 import { AuthService } from "./auth/auth.service";
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import {
-  NwbAlertComponent,
-  NwbAlertService,
-  NwbAlertConfig,
-} from "@wizishop/ng-wizi-bulma";
-import { AlertService } from "./alert.service";
 import { Router } from "@angular/router";
-import { LoaderService } from "./loader.service";
-
+import { AlertService } from "./services/alert.service";
+import { LoaderService } from "./services/loader.service";
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
   constructor(

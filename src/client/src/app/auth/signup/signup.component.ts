@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth.service";
-import { NwbAlertService, NwbAlertConfig } from "@wizishop/ng-wizi-bulma";
-import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { AlertService } from "src/app/alert.service";
+import { AlertService } from "src/app/services/alert.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signup",

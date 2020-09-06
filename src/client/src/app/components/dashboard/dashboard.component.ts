@@ -1,7 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { BalanceService } from "../balance.service";
-import { ExpenseService } from "../expense.service";
-import { FriendsService } from "../friends.service";
 import {
   NwbAlertService,
   NwbAlertConfig,
@@ -10,6 +7,9 @@ import {
 } from "@wizishop/ng-wizi-bulma";
 import { Router } from "@angular/router";
 import { AddExpenseDialogComponent } from "./add-expense-dialog/add-expense-dialog.component";
+import { BalanceService } from "src/app/services/balance.service";
+import { ExpenseService } from "src/app/services/expense.service";
+import { FriendsService } from "src/app/services/friends.service";
 
 @Component({
   selector: "app-dashboard",

@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth.service";
-import { NwbAlertConfig, NwbAlertService } from "@wizishop/ng-wizi-bulma";
 import { Router } from "@angular/router";
-import { AlertService } from "src/app/alert.service";
+import { AlertService } from "src/app/services/alert.service";
 
 @Component({
   selector: "app-login",

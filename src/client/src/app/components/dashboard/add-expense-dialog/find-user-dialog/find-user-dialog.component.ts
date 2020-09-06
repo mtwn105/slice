@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { UserService } from "src/app/user.service";
-import { FriendsService } from "src/app/friends.service";
+import { UserService } from "src/app/services/user.service";
+import { FriendsService } from "src/app/services/friends.service";
 
 @Component({
   selector: "app-find-user-dialog",

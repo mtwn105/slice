@@ -7,23 +7,24 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { SignupComponent } from "./auth/signup/signup.component";
-import { NavbarComponent } from "./navbar/navbar.component";
 import { AuthService } from "./auth/auth.service";
 import { AuthGuard } from "./auth/auth.guard";
-import { DashboardComponent } from "./dashboard/dashboard.component";
 import { NwbAllModule } from "@wizishop/ng-wizi-bulma";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { BalanceService } from "./balance.service";
-import { ExpenseService } from "./expense.service";
-import { FriendsService } from "./friends.service";
 import { HttpRequestInterceptor } from "./http.interceptor";
-import { ExpenseItemComponent } from "./dashboard/expense-item/expense-item.component";
-import { FriendItemComponent } from "./dashboard/friend-item/friend-item.component";
 import { AvatarModule } from "ngx-avatar";
-import { FriendsComponent } from "./friends/friends.component";
-import { UserItemComponent } from "./friends/user-item/user-item.component";
-import { AddExpenseDialogComponent } from "./dashboard/add-expense-dialog/add-expense-dialog.component";
-import { FindUserDialogComponent } from './dashboard/add-expense-dialog/find-user-dialog/find-user-dialog.component';
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { ExpenseItemComponent } from "./components/dashboard/expense-item/expense-item.component";
+import { FriendItemComponent } from "./components/dashboard/friend-item/friend-item.component";
+import { FriendsComponent } from "./components/friends/friends.component";
+import { UserItemComponent } from "./components/friends/user-item/user-item.component";
+import { AddExpenseDialogComponent } from "./components/dashboard/add-expense-dialog/add-expense-dialog.component";
+import { FindUserDialogComponent } from "./components/dashboard/add-expense-dialog/find-user-dialog/find-user-dialog.component";
+import { BalanceService } from "./services/balance.service";
+import { ExpenseService } from "./services/expense.service";
+import { FriendsService } from "./services/friends.service";
+import { LoaderService } from "./services/loader.service";
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { FindUserDialogComponent } from './dashboard/add-expense-dialog/find-use
     BalanceService,
     ExpenseService,
     FriendsService,
+    LoaderService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [AddExpenseDialogComponent],

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FriendsService } from "src/app/friends.service";
-import { AlertService } from "src/app/alert.service";
 import { NwbDialogConfig, NwbDialogService } from "@wizishop/ng-wizi-bulma";
 import { Router } from "@angular/router";
+import { FriendsService } from "src/app/services/friends.service";
+import { AlertService } from "src/app/services/alert.service";
 
 @Component({
   selector: "app-user-item",
