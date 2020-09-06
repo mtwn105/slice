@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FormGroup, FormArray } from "@angular/forms";
-import { count } from "console";
 import { AlertService } from "src/app/services/alert.service";
 
 @Component({
