@@ -1,6 +1,6 @@
 # Slice - Split Bills
 
-## Made with ❤ using Node.js, Angular & MongoDB
+## Made with ❤ using Node.js, Angular & MongoDB (MEAN)
 
 ### [Frontend](https://slice-app.netlify.app/) | [Backend](https://slice-nodejs.herokuapp.com)
 
