@@ -63,7 +63,7 @@ You can find API Docs [here](https://slice-api-docs.netlify.app/)
 
 ##### Contributing is very welcome!.
 Clone the project and get started by referring to the Usage guide above!
-Follow basic code and conducts for contributing to an open source project.
+Follow the Code of Conduct from [here](https://github.com/mtwn105/slice/blob/master/CODE_OF_CONDUCT.md)
 
 
  
