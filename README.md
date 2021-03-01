@@ -2,12 +2,12 @@
 
 ## Made with ❤ using Node.js, Angular & MongoDB
 
-### [Frontend](https://slice-vue.netlify.app/) | [Backend](https://slice-nodejs.herokuapp.com)
+### [Frontend](https://slice-app.netlify.app/) | [Backend](https://slice-nodejs.herokuapp.com)
 
 #### Features:
 
 - [x] Login/Signup with JWT token implementation
-- [x] Add other users as a friend
+- [x] Manage Friends
 - [x] Add an Expense and split among friends
 - [ ] Manage Expenses (Edit and Delete)
 
