@@ -6,9 +6,10 @@ const { calculateBalanceForExpense } = require("./balance");
 router.get("/:userId", async (req, res, next) => {
   console.log("Finding Expenses for User Id ", req.params.userId);
   try {
-    const expenses = await Expense.find().all("members.id", [
-      req.params.userId,
-    ]);
+    const expenses = await Expense.find()
+      .all("members.id", [req.params.userId])
+      .sort('-_id');
+
     const expensesWithBalance = [];
     for (const expense of expenses) {
       console.log("EXP", expense);
