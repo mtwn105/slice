@@ -2,7 +2,7 @@
 
 ## Made with ❤ using Node.js, Angular & MongoDB (MEAN)
 
-### [Frontend](https://slice-app.netlify.app/) | [Backend](https://slice-nodejs.herokuapp.com)
+### [Frontend](https://slice-app.netlify.app/) | [Backend](https://slice-backend.fly.dev)
 
 #### Features:
 
@@ -10,6 +10,10 @@
 - [x] Manage Friends
 - [x] Add an Expense and split among friends
 - [ ] Manage Expenses (Edit and Delete)
+
+## Screens
+
+![login](https://user-images.githubusercontent.com/12975481/157815086-a010c9e5-321b-466f-a8ce-8e6ea1551748.png)
 
 #### Tech Stack:
 
